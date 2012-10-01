@@ -106,3 +106,11 @@ typedef enum {
 - (void)show;
 
 @end
+
+@interface SBTableAlertDataSource : NSObject <SBTableAlertDataSource> {}
+
+@property (readonly, nonatomic, retain) NSArray */*of NSString*/cellTitles;
+
+- (id)initWithCellTitles:(NSArray */*of NSString*/)cellTitles;
+
+@end

@@ -503,3 +503,37 @@
 }
 
 @end
+
+@interface SBTableAlertDataSource ()
+@property (nonatomic, retain) NSArray */*of NSString*/cellTitles;
+@end
+
+@implementation SBTableAlertDataSource
+
+- (id)initWithCellTitles:(NSArray */*of NSString*/)cellTitles {
+  if ((self = [super init])) {
+    self.cellTitles = cellTitles;
+  }
+  return self;
+}
+
+- (void)dealloc {
+  [self setCellTitles:nil];
+  [super dealloc];
+}
+
+#pragma mark SBTableAlertDataSource
+
+- (UITableViewCell *)tableAlert:(SBTableAlert *)tableAlert cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+  cell.textLabel.text = [self.cellTitles objectAtIndex:indexPath.row];
+  cell.textLabel.minimumFontSize = 10.0;
+  cell.textLabel.adjustsFontSizeToFitWidth = YES;
+  return [cell autorelease];
+}
+
+- (NSInteger)tableAlert:(SBTableAlert *)tableAlert numberOfRowsInSection:(NSInteger)section {
+  return [self.cellTitles count];
+}
+
+@end
